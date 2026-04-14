@@ -34,13 +34,13 @@ def kmeans(X, k):
     return centroids, labels
 
 
-def kmeans_diamonds(x, k):
+def kmeans_diamonds(n, k):
     """
     Perform k-means clustering on the diamonds dataset.
 
     Parameters
     ----------
-    x : int
+    n : int
         Number of rows from the diamonds dataset to use
     k : int
         Number of clusters
@@ -53,8 +53,8 @@ def kmeans_diamonds(x, k):
         labels : ndarray of shape (n_samples,)
             Cluster assignment for each sample
     """
-    # Get first x rows of numerical diamonds data
-    data = numerical_diamonds.iloc[:x].values
+    # Get first n rows of numerical diamonds data
+    data = numerical_diamonds.iloc[:n].values
 
     # Run kmeans on this subset
     centroids, labels = kmeans(data, k)
@@ -62,7 +62,7 @@ def kmeans_diamonds(x, k):
     return centroids, labels
 
 
-def kmeans_timer(n, k, c_iters):
+def kmeans_timer(n, k, n_iter):
     """
     Measure average runtime of k-means clustering on diamonds dataset.
 
@@ -72,7 +72,7 @@ def kmeans_timer(n, k, c_iters):
         Number of rows from the diamonds dataset to use
     k : int
         Number of clusters
-    c_iters : int
+    n_iter : int
         Number of times to run the clustering
 
     Returns
@@ -82,7 +82,7 @@ def kmeans_timer(n, k, c_iters):
     """
     times = []
 
-    for _ in range(c_iters):
+    for _ in range(n_iter):
         start = time()
         kmeans_diamonds(n, k)
         elapsed = time() - start
